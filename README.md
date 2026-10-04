@@ -65,6 +65,7 @@ Navegador / Postman ───► │  Spring Boot (JAR)          JDBC           
 **Ubuntu 22 / Linux:**
 
 ```bash
+apt install curl
 curl -fsSL https://get.docker.com | sudo sh
 sudo usermod -aG docker $USER
 ```
@@ -815,7 +816,7 @@ Todo lo siguiente se hace en el **servidor**, salvo los `scp`, que se ejecutan e
 
 ```bash
 # Docker
-sudo apt install docker.io
+curl -fsSL https://get.docker.com | sudo sh
 sudo usermod -aG docker $USER
 
 # Java (si aún no lo instalaste en la guía base)
