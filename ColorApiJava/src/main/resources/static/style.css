@@ -1,0 +1,119 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: monospace;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    transition: background-color 0.3s ease;
+    background-color: black;
+}
+
+#color-code {
+    font-size: clamp(48px, 10vw, 120px);
+    margin-bottom: 20px;
+}
+
+#saludo {
+    font-size: clamp(28px, 6vw, 60px);
+    margin: 20px;
+    min-height: 70px;
+    text-align: center;
+}
+
+button, input {
+    font-size: 28px;
+    padding: 12px 24px;
+    margin: 10px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    font-family: inherit;
+}
+
+button {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+input {
+    width: min(70vw, 340px);
+    background-color: rgba(0, 0, 0, 0.25);
+    color: white;
+    text-shadow: none;
+    outline: none;
+}
+
+input:focus {
+    border-color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* ---- Historial ---- */
+.historial {
+    width: min(92%, 640px);
+    margin: 30px 0 10px;
+}
+
+.historial h2 {
+    font-size: clamp(24px, 4vw, 32px);
+    text-align: center;
+    margin: 10px 0 14px;
+}
+
+.historial ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.historial li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 16px;
+    margin: 8px 0;
+    font-size: 22px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+}
+
+.muestra {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    flex-shrink: 0;
+}
+
+.h-nombre {
+    flex: 1;
+    overflow-wrap: anywhere;
+}
+
+.h-color {
+    opacity: 0.8;
+}
+
+#historial-vacio {
+    text-align: center;
+    opacity: 0.85;
+}

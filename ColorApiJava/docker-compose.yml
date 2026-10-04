@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16
+    container_name: colorapi-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: colorapi
+      POSTGRES_USER: colorapi
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-colorapi_dev}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U colorapi -d colorapi"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

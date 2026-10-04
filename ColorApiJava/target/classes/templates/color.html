@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Color Generator</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body th:style="|background-color: ${color}|">
+    <div id="color-code" th:text="${color}">#000000</div>
+    <button id="copy-button">Copiar Hex</button>
+    <div id="saludo"></div>
+    <div>
+        <input type="text" id="nombre-input" placeholder="Escribe tu nombre" maxlength="50" required>
+        <button id="saludar-button">Saludar</button>
+    </div>
+
+    <section class="historial">
+        <h2>Últimos saludos</h2>
+        <p id="historial-vacio" th:if="${#lists.isEmpty(historial)}">Aún no hay saludos guardados.</p>
+        <ul id="historial-lista">
+            <li th:each="s : ${historial}">
+                <span class="muestra" th:style="|background-color: ${s.color}|"></span>
+                <span class="h-nombre" th:text="${s.nombre}">Nombre</span>
+                <span class="h-color" th:text="${s.color}">#000000</span>
+            </li>
+        </ul>
+    </section>
+
+    <script src="/script.js"></script>
+</body>
+</html>
