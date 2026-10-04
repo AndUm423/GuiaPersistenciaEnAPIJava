@@ -844,6 +844,8 @@ Desde **tu computador**, en la raíz del proyecto:
 
 ```bash
 scp docker-compose.yml usuario@tu-ip:/opt/colorapi/
+```
+```bash
 scp target/ColorApiJava-0.0.1-SNAPSHOT.jar usuario@tu-ip:/opt/colorapi/app.jar
 ```
 
