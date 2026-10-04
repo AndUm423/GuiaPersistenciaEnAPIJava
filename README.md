@@ -808,16 +808,13 @@ Usamos `-DskipTests` porque el test que genera Spring (`contextLoads`) arranca t
 
 ---
 
-## Paso 14: Publicar en Ubuntu 22 para que siga sirviendo
+## Paso 14: Publicar en Ubuntu 22
 
 Todo lo siguiente se hace en el **servidor**, salvo los `scp`, que se ejecutan en tu computador.
 
 ### 14.1. Preparar el servidor
 
 ```bash
-# Docker
-curl -fsSL https://get.docker.com | sudo sh
-sudo usermod -aG docker $USER
 
 # Java (si aún no lo instalaste en la guía base)
 sudo apt update
@@ -854,8 +851,17 @@ scp target/ColorApiJava-0.0.1-SNAPSHOT.jar usuario@tu-ip:/opt/colorapi/app.jar
 
 ```bash
 cd /opt/colorapi
-docker compose up -d
-docker compose ps
+# postgreSQL
+set -a; source .env; set +a        # carga DB_PASSWORD en esta terminal
+echo "$DB_PASSWORD" | wc -c        # debe imprimir un número mayor que 1 (la clave se cargó)
+
+apt update
+apt install -y postgresql
+
+pg_lsclusters                      # debe decir "online" en la columna Status
+
+sudo -u postgres psql -c "CREATE USER colorapi WITH PASSWORD '$DB_PASSWORD';"
+sudo -u postgres psql -c "CREATE DATABASE colorapi OWNER colorapi;"
 ```
 
 Espera a ver `healthy`. La base arrancará sola cada vez que se reinicie el servidor (`restart: unless-stopped`).
@@ -952,7 +958,7 @@ curl -k https://tu-ip:8443/historial
 
 ---
 
-## Paso 15: Comprobar que realmente "sigue sirviendo"
+## Paso 15: Comprobar persistencia
 
 Con unos cuantos nombres ya guardados, haz estas tres pruebas en el servidor:
 
@@ -1142,3 +1148,5 @@ Es el mensaje genérico del Paso 10. El detalle real está en el log: `journalct
 3. **DTOs y paginación:** devuelve objetos propios en lugar de la entidad y agrega `?pagina=` al historial.
 4. **Pruebas con Testcontainers:** levantan un PostgreSQL temporal durante los tests, sin necesidad de `-DskipTests`.
 5. **Todo en contenedores:** agrega un `Dockerfile` para la aplicación y súmala al `docker-compose.yml`, para desplegar todo con un único `docker compose up -d`.
+
+Seguimiento despliegue en servidor: https://docs.google.com/document/d/1_G3nVS2N5WhuONHr1PaE59Y5jMzOFT_9mbndFBebILU/edit?usp=sharing 
